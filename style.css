@@ -1,94 +1,136 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@300;600&display=swap');
 
-.slide-container .prev,
-.slide-container .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  margin-top: -22px;
-  padding: 16px;
-  color: white;
-  font-weight: bold;
-  font-size: 20px;
-  transition: all 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-}
-
-.slide-container .prev:hover,
-.slide-container .next:hover {
-  background-color: rgba(255, 255, 255, 0.25);
-  color: white;
-}
-
-.slide-container .prev {
-  left: 2px;
-}
-
-.slide-container .next {
-  right: 2px;
-}
-
-.dots-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-}
-
-.dots-container .dot {
-  cursor: pointer;
-  margin: 5px;
-  width: 20px;
-  height: 20px;
-  color: #333;
-  border-radius: 50%;
-  background-color: #dfd6ce;
-}
-
-.dots-container .dot.active {
-  border: 2px solid rgb(46, 166, 206);
-}
-
+/* Configuración Global */
 * {
-  padding: 0;
-  border: 0;
-  box-sizing: border-box;
+    padding: 0;
+    margin: 0; /* Cambio aplicado */
+    border: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
 }
 
 body {
-  height: 100%;
-  background-image: url("./resources/Background.jpg");
+    min-height: 100vh; /* Cambio aplicado */
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("./resources/Background.jpg") no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
-body h1 {
-  text-align: center;
+h1 {
+    font-family: 'Poppins', sans-serif; /* Cambio aplicado */
+    color: #ffffff; /* Cambio aplicado */
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 30px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
+/* Contenedor de Diapositivas */
 .slide-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 1000px;
-  margin: auto;
-  position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1100px; /* Cambio aplicado */
+    margin: 20px auto;
+    position: relative;
+    overflow: hidden; /* Cambio aplicado */
+    border-radius: 15px; /* Cambio aplicado */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4); /* Cambio aplicado */
 }
 
-.slide-container .slide {
-  display: none;
-  width: 100%;
+    .slide-container .slide {
+        display: none;
+        width: 100%;
+    }
+
+        .slide-container .slide img {
+            width: 100%;
+            display: block;
+            object-fit: cover; /* Cambio aplicado */
+            filter: brightness(0.9); /* Cambio aplicado */
+        }
+
+    /* Navegación (Flechas) */
+    .slide-container .prev,
+    .slide-container .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%); /* Cambio aplicado */
+        width: 50px; /* Cambio aplicado */
+        height: 50px; /* Cambio aplicado */
+        display: flex; /* Cambio aplicado */
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 24px;
+        transition: background-color 0.3s ease, transform 0.2s;
+        background-color: rgba(0, 0, 0, 0.4); /* Cambio aplicado */
+        border-radius: 50%; /* Cambio aplicado */
+        user-select: none;
+        z-index: 10;
+    }
+
+        .slide-container .prev:hover,
+        .slide-container .next:hover {
+            background-color: rgba(46, 166, 206, 0.8);
+            transform: translateY(-50%) scale(1.1); /* Cambio aplicado */
+        }
+
+    .slide-container .prev {
+        left: 15px;
+    }
+
+    .slide-container .next {
+        right: 15px;
+    }
+
+/* Contenedor de Puntos */
+.dots-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 10px; /* Cambio aplicado */
+}
+
+    .dots-container .dot {
+        cursor: pointer;
+        width: 12px; /* Cambio aplicado */
+        height: 12px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.5);
+        transition: all 0.3s ease;
+    }
+
+        .dots-container .dot:hover {
+            transform: scale(1.3);
+        }
+
+        .dots-container .dot.active {
+            width: 30px; /* Cambio aplicado */
+            border-radius: 10px; /* Cambio aplicado */
+            background-color: rgb(46, 166, 206);
+            border: none;
+        }
+
+/* Animaciones */
+@keyframes fade {
+    from {
+        opacity: 0.4;
+        transform: scale(1.05);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .slide-container .slide.fade {
-  animation: fade 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
-}
-
-.slide-container .slide img {
-  width: 100%;
-}
-
-h1{
-  font-family: 'Open Sans', sans-serif;
-  color: #333;
+    animation: fade 0.8s ease-out;
 }
